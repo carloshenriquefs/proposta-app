@@ -6,6 +6,7 @@ import com.pieropan.propostaapp.entity.Proposta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import java.util.List;
 
 @Mapper
 public interface PropostaMapper {
@@ -29,4 +30,6 @@ public interface PropostaMapper {
     @Mapping(target = "cpf", source = "usuario.cpf")
     @Mapping(target = "renda", source = "usuario.renda")
     PropostaResponseDto convertEntityToDto(Proposta proposta);
+
+    List<PropostaResponseDto> convertListEntityToListDto(Iterable<Proposta> propostas);
 }
