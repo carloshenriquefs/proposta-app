@@ -16,11 +16,16 @@ public class PropostaService {
 
     private PropostaRepository propostaRepository;
 
+    private NotificarRabbitMQService notificarRabbitMQService;
+
     public PropostaResponseDto criar(PropostaRequestDto requestDto) {
         Proposta proposta = PropostaMapper.INSTANCE.convertDtoToProposta(requestDto);
         propostaRepository.save(proposta);
 
-        return PropostaMapper.INSTANCE.convertEntityToDto(proposta);
+        PropostaResponseDto response = PropostaMapper.INSTANCE.convertEntityToDto(proposta);
+        notificarRabbitMQService.notificar(response, "proposta-pendente.ex");
+
+        return response;
     }
 
     public List<PropostaResponseDto> obterProposta() {
