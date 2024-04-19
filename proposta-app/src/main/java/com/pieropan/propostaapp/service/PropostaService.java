@@ -5,25 +5,34 @@ import com.pieropan.propostaapp.dto.PropostaResponseDto;
 import com.pieropan.propostaapp.entity.Proposta;
 import com.pieropan.propostaapp.mapper.PropostaMapper;
 import com.pieropan.propostaapp.repository.PropostaRepository;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class PropostaService {
 
     private PropostaRepository propostaRepository;
 
-    private NotificarRabbitMQService notificarRabbitMQService;
+    private NotificarService notificarService;
+
+    private String exchange;
+
+    public PropostaService(PropostaRepository propostaRepository,
+                           NotificarService notificarService,
+                           @Value("${rabbitmq.propostapendente.exchange}") String exchange) {
+        this.propostaRepository = propostaRepository;
+        this.notificarService = notificarService;
+        this.exchange = exchange;
+    }
 
     public PropostaResponseDto criar(PropostaRequestDto requestDto) {
         Proposta proposta = PropostaMapper.INSTANCE.convertDtoToProposta(requestDto);
         propostaRepository.save(proposta);
 
         PropostaResponseDto response = PropostaMapper.INSTANCE.convertEntityToDto(proposta);
-        notificarRabbitMQService.notificar(response, "proposta-pendente.ex");
+        notificarService.notificar(response, exchange);
 
         return response;
     }
