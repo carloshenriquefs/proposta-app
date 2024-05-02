@@ -17,6 +17,5 @@ public class AnaliseCreditoService {
 
     public void analisar(Proposta proposta) {
         int pontuacao = calculoPontoList.stream().mapToInt(impl -> impl.calcular(proposta)).sum();
-
     }
 }
