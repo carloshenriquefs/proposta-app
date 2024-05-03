@@ -6,6 +6,7 @@ import com.pieropan.propostaapp.entity.Proposta;
 import com.pieropan.propostaapp.mapper.PropostaMapper;
 import com.pieropan.propostaapp.repository.PropostaRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.List;
 public class PropostaService {
 
     private PropostaRepository propostaRepository;
+
+    private SimpMessagingTemplate template;
 
     private NotificacaoRabbitService notificacaoRabbitService;
 
