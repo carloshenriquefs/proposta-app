@@ -1,4 +1,4 @@
-package com.pieropan.notificacao.config;
+package com.pieropan.notifacao.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -13,15 +13,15 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AmazonSnsConfiguration {
 
-    @Value("${aws.accessKey}")
-    private String accessKey;
+    @Value("${aws.acessKey}")
+    private String acessKey;
 
     @Value("${aws.secretKey}")
     private String secretKey;
 
     @Bean
     public AWSCredentials awsCredentials() {
-        return new BasicAWSCredentials(accessKey, secretKey);
+        return new BasicAWSCredentials(acessKey, secretKey);
     }
 
     @Bean

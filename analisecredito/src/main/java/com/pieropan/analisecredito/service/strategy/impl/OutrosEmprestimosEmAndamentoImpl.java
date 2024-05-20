@@ -4,14 +4,17 @@ import com.pieropan.analisecredito.domain.Proposta;
 import com.pieropan.analisecredito.service.strategy.CalculoPonto;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
+
 @Component
-public class RendaMaiorValorSolicitado implements CalculoPonto {
+public class OutrosEmprestimosEmAndamentoImpl implements CalculoPonto {
+
     @Override
     public int calcular(Proposta proposta) {
-        return rendaMaiorValorSolicitado(proposta) ? 100 : 0;
+        return outrosEmprestimosEmAndamento() ? 0 : 80;
     }
 
-    private boolean rendaMaiorValorSolicitado(Proposta proposta) {
-        return proposta.getUsuario().getRenda() > proposta.getValorSolicitado();
+    private boolean outrosEmprestimosEmAndamento() {
+        return new Random().nextBoolean();
     }
 }

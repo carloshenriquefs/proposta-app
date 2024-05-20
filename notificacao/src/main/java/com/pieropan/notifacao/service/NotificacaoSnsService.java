@@ -1,4 +1,4 @@
-package com.pieropan.notificacao.service;
+package com.pieropan.notifacao.service;
 
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.PublishRequest;
@@ -12,7 +12,10 @@ public class NotificacaoSnsService {
     private AmazonSNS amazonSNS;
 
     public void notificar(String telefone, String mensagem) {
-        PublishRequest publishRequest = new PublishRequest().withMessage(mensagem).withPhoneNumber(telefone);
+        PublishRequest publishRequest = new PublishRequest()
+                .withMessage(mensagem)
+                .withPhoneNumber(telefone);
+
         amazonSNS.publish(publishRequest);
     }
 }

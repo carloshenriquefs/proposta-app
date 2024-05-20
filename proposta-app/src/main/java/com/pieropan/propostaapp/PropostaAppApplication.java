@@ -10,8 +10,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 @EnableWebSocketMessageBroker
 public class PropostaAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PropostaAppApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(PropostaAppApplication.class, args);
+    }
 }

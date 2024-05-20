@@ -1,8 +1,8 @@
-package com.pieropan.notificacao.listener;
+package com.pieropan.notifacao.listener;
 
-import com.pieropan.notificacao.constante.MensagemConstante;
-import com.pieropan.notificacao.domain.Proposta;
-import com.pieropan.notificacao.service.NotificacaoSnsService;
+import com.pieropan.notifacao.constante.MensagemConstante;
+import com.pieropan.notifacao.domain.Proposta;
+import com.pieropan.notifacao.service.NotificacaoSnsService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

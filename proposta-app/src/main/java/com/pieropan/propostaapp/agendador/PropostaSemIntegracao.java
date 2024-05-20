@@ -1,6 +1,5 @@
 package com.pieropan.propostaapp.agendador;
 
-import com.pieropan.propostaapp.entity.Proposta;
 import com.pieropan.propostaapp.repository.PropostaRepository;
 import com.pieropan.propostaapp.service.NotificacaoRabbitService;
 import org.slf4j.Logger;
@@ -35,16 +34,10 @@ public class PropostaSemIntegracao {
         propostaRepository.findAllByIntegradaIsFalse().forEach(proposta -> {
             try {
                 notificacaoRabbitService.notificar(proposta, exchange);
-                atualizarProposta(proposta);
+                propostaRepository.atualizarStatusIntegrada(proposta.getId(), true);
             } catch (RuntimeException ex) {
                 logger.error(ex.getMessage());
             }
         });
     }
-
-    private void atualizarProposta(Proposta proposta) {
-        proposta.setIntegrada(true);
-        propostaRepository.save(proposta);
-    }
-
 }

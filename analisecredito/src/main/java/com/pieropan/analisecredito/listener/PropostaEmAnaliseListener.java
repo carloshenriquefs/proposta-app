@@ -1,15 +1,21 @@
-package com.pieropan.notificacao.listener;
-
+package com.pieropan.analisecredito.listener;
 
 import com.pieropan.analisecredito.domain.Proposta;
+import com.pieropan.analisecredito.service.AnaliseCreditoService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class PropostaEmAnaliseListener {
 
-    @RabbitListener(queues = "${rabbitmq.queue.proposta.pendente}")
-    public void propostaPendente(Proposta proposta) {
+    private final AnaliseCreditoService analiseCreditoService;
 
+    public PropostaEmAnaliseListener(AnaliseCreditoService analiseCreditoService) {
+        this.analiseCreditoService = analiseCreditoService;
+    }
+
+    @RabbitListener(queues = "${rabbitmq.queue.proposta.pendente}")
+    public void propostaEmAnalise(Proposta proposta) {
+        analiseCreditoService.analisar(proposta);
     }
 }

@@ -8,10 +8,14 @@ import lombok.Setter;
 public class Usuario {
 
     private Long id;
-    private String nome;
-    private String sobrenome;
-    private String cpf;
-    private String telefone;
-    private Double renda;
 
+    private String nome;
+
+    private String sobrenome;
+
+    private String cpf;
+
+    private String telefone;
+
+    private Double renda;
 }

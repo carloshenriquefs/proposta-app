@@ -4,16 +4,11 @@ import com.pieropan.analisecredito.domain.Proposta;
 import com.pieropan.analisecredito.service.strategy.CalculoPonto;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
-
 @Component
-public class OutrosEmprestimosEmAndamento implements CalculoPonto {
+public class PrazoPagamentoInferiorDezAnosImpl implements CalculoPonto {
+
     @Override
     public int calcular(Proposta proposta) {
-        return outrosEmprestimosEmAndamento() ? 0 : 80;
-    }
-
-    private boolean outrosEmprestimosEmAndamento() {
-        return new Random().nextBoolean();
+        return proposta.getPrazoPagamento() < 120 ? 80 : 0;
     }
 }

@@ -5,9 +5,14 @@ import com.pieropan.analisecredito.service.strategy.CalculoPonto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PrazoPagamentoInferiorDezAnos implements CalculoPonto {
+public class RendaMaiorValorSolicitadoImpl implements CalculoPonto {
+
     @Override
     public int calcular(Proposta proposta) {
-        return proposta.getPrazoPagamento() < 120 ? 80 : 0;
+        return rendaMaiorValorSolicitado(proposta) ? 100 : 0;
+    }
+
+    private boolean rendaMaiorValorSolicitado(Proposta proposta) {
+        return proposta.getUsuario().getRenda() > proposta.getValorSolicitado();
     }
 }
